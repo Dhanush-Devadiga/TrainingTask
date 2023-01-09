@@ -101,11 +101,15 @@ class PasswordViewController: UIViewController {
         currentViewModel?.assignParameters()
         currentViewModel?.registerCurrentUser { isSuccess in
             if isSuccess {
-                print("Successful registraion")
                 self.currentViewModel?.currentUserEmail = (self.currentViewModel?.currentUser.email)!
                 self.currentViewModel?.sendOTP() { didSendOTP in
-                    if didSendOTP {
-                        print("OTP Sent")
+                    DispatchQueue.main.async {
+                        if didSendOTP {
+                            print("OTP Sent")
+                            let otpVC = self.storyboard?.instantiateViewController(identifier: "OTPVerificationVC") as! OTPVerificationVC
+                            otpVC.registerVM = self.currentViewModel
+                            self.navigationController?.pushViewController(otpVC, animated: true)
+                        }
                     }
                 }
             } else {
@@ -119,10 +123,6 @@ class PasswordViewController: UIViewController {
                 }
             }
         }
-        
-        let otpVC = storyboard?.instantiateViewController(identifier: "OTPVerificationVC") as! OTPVerificationVC
-        otpVC.registerVM = currentViewModel
-        navigationController?.pushViewController(otpVC, animated: true)
     }
     
     private func setNewPassword() {

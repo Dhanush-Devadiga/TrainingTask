@@ -26,6 +26,7 @@ class RegistrationViewModel {
     
     var otp: Int = 0
     var verifyOTPHeaders: [String: String] = [:]
+    var currentOtp: Int?
     //var verifyOTPParameters: [String: Int] = [:]
     
     var resetPasswordUrl = "\(baseURL)/forgot-password"
