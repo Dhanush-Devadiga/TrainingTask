@@ -21,6 +21,7 @@ class OnboardingViewController: UIViewController {
     @IBOutlet var forwardButton: GradientButton!
     @IBOutlet weak var skip: UIButton!
     @IBOutlet weak var visualView: NSLayoutConstraint!
+    @IBOutlet weak var ScrollView: UIScrollView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +32,7 @@ class OnboardingViewController: UIViewController {
         self.contentLabel.text = content
         self.contentImageView.image = UIImage(named: imageFile)
         self.pageControl.currentPage = index
-        
+        ScrollView.contentInsetAdjustmentBehavior = .automatic
         switch index {
         case 0...1: forwardButton.setTitle("NEXT", for: .normal)
         case 2: forwardButton.setTitle("LET'S START", for: .normal)
