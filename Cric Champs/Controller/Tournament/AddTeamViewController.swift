@@ -116,6 +116,7 @@ class AddTeamViewController: UIViewController {
                         if success {
                             self.setUpView()
                             self.disableField()
+                            self.showToast()
                             self.tableView.reloadData()
                         } else {
                             alertAction(controller: self, message: error!.localizedDescription)
@@ -125,7 +126,7 @@ class AddTeamViewController: UIViewController {
             }
         }
         saveTeam.isEnabled = true
-
+        
     }
     
     @IBAction func onClickAddPlayer(_ sender: Any) {
@@ -152,6 +153,20 @@ class AddTeamViewController: UIViewController {
         return isValid
     }
     
+    private func showToast() {
+        let toast = Toast().showToastMessage(message: "Team Saved successfully")
+        toast.frame.origin.x = (self.view.frame.width / 2) - (toast.frame.width / 2)
+        toast.frame.origin.y = self.view.frame.height - 100
+        self.view.addSubview(toast)
+        UIView.animate(withDuration: 3.0, delay: 0.2, options: .curveEaseInOut, animations: {
+            toast.alpha = 0.0
+        }, completion: { isCompleted in
+            if isCompleted {
+                toast.removeFromSuperview()
+            }
+            
+        })
+    }
 }
 
 extension AddTeamViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {

@@ -8,22 +8,37 @@
 import Foundation
 import UIKit
 
-extension UIViewController {
-    func showToast(message : String, controller: UIViewController) {
-        let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 120, y: self.view.frame.size.height + 90, width: 250, height: 66))
-        toastLabel.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
-        toastLabel.textColor = UIColor.white
-        toastLabel.font = .systemFont(ofSize: 17.0)
-        toastLabel.textAlignment = .center;
-        toastLabel.text = message
-        toastLabel.alpha = 1.0
-        toastLabel.numberOfLines = 2
-        toastLabel.layer.cornerRadius = 10;
-        toastLabel.clipsToBounds  =  true
-        controller.view.addSubview(toastLabel)
-        
-        UIView.animate(withDuration: 2.0, delay: 0.1, options: .curveEaseOut, animations: {
-                        toastLabel.alpha = 0.0 }, completion: {(isCompleted) in
-                            toastLabel.removeFromSuperview()
-                        })
-    } }
+class Toast: UILabel {
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    override func drawText(in rect: CGRect) {
+        super.drawText(in: rect.inset(by: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)))
+    }
+    
+    override func sizeThatFits(_ size: CGSize) -> CGSize {
+        let sizeToFit = super.sizeThatFits(size)
+        let width = sizeToFit.width + 20
+        let height = sizeToFit.height + 20
+        return CGSize(width: width, height: height)
+    }
+    
+    func showToastMessage(message: String) -> Toast {
+        self.text = message
+        self.sizeToFit()
+        self.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        self.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        self.textAlignment = .center
+        self.layer.cornerRadius = self.bounds.height / 2
+        self.clipsToBounds = true
+        return self
+    }
+    
+
+}
