@@ -19,11 +19,28 @@ class OTPVerificationVC: UIViewController {
     var isForgotPassword = false
     var resetPasswordDelagate: ResetPassword?
 
+    @IBOutlet weak var resendOtpButton: UIButton!
+    var endTimer = Date(timeIntervalSinceNow: 21)
+    var timer = Timer()
     override func viewDidLoad() {
         super.viewDidLoad()
-
         _ = self.verifyButton.applyGradient( colours: [ #colorLiteral(red: 1, green: 0.7294117647, blue: 0.5490196078, alpha: 1), #colorLiteral(red: 0.9960784314, green: 0.3607843137, blue: 0.4156862745, alpha: 1)], cornerRadius: 4)
+        resendOtpButton.setTitle("20.00", for: .normal)
+        resendOtpButton.isEnabled = false
+        resendOtpButton.showsTouchWhenHighlighted = true
+        
     }
+    override func viewWillAppear(_ animated: Bool) {
+        timer = .scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+    }
+    @objc func updateTimer(_ timer: Timer) {
+        let remaining = endTimer.timeIntervalSinceNow
+        resendOtpButton.setTitle(remaining.time, for: .normal)
+           if remaining <= 1 {
+            resendOtpButton.isEnabled = true
+            resendOtpButton.setTitle("Resend OTP", for: .normal)
+           }
+       }
     
     @IBAction func onVerifyButtonClick(_ sender: Any) {
         if isForgotPassword {
@@ -92,4 +109,9 @@ class OTPVerificationVC: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
+}
+extension TimeInterval {
+    var time: String {
+        String(format: "%02d:%02d", Int(0), Int(truncatingRemainder(dividingBy: 60)))
+    }
 }
