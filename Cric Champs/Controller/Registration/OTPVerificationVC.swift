@@ -25,7 +25,7 @@ class OTPVerificationVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         _ = self.verifyButton.applyGradient( colours: [ #colorLiteral(red: 1, green: 0.7294117647, blue: 0.5490196078, alpha: 1), #colorLiteral(red: 0.9960784314, green: 0.3607843137, blue: 0.4156862745, alpha: 1)], cornerRadius: 4)
-        resendOtpButton.setTitle("20.00", for: .normal)
+        resendOtpButton.setTitle("0:20", for: .normal)
         resendOtpButton.isEnabled = false
         resendOtpButton.showsTouchWhenHighlighted = true
         
@@ -93,6 +93,7 @@ class OTPVerificationVC: UIViewController {
     }
     
     @IBAction func resendOTPButton(_ sender: Any) {
+        resendOtpButton.blink()
         if !isForgotPassword {
             registerVM?.sendOTP(completion: { (isSuccess) in
             print("resent OTP")
@@ -112,6 +113,16 @@ class OTPVerificationVC: UIViewController {
 }
 extension TimeInterval {
     var time: String {
-        String(format: "%02d:%02d", Int(0), Int(truncatingRemainder(dividingBy: 60)))
+        String(format: "%01d:%02d", Int(0), Int(truncatingRemainder(dividingBy: 60)))
     }
+}
+extension UIView{
+     func blink() {
+        self.alpha = 0.2
+        UIView.animate(withDuration: 0.3, delay: 0.0, options: UIView.AnimationOptions.curveEaseOut, animations: {
+
+            self.alpha = 1.0
+
+        }, completion: nil)
+     }
 }
