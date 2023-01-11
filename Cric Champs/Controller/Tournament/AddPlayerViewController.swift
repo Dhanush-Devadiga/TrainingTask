@@ -291,6 +291,7 @@ class AddPlayerViewController: UIViewController, UIScrollViewDelegate {
                 tournamentViewModel.savePlayer { success, error in
                     DispatchQueue.main.async {
                         if success {
+                            self.showToast()
                             self.clearAllFields()
                         } else {
                             alertAction(controller: self, message: error!.localizedDescription)
@@ -331,6 +332,21 @@ class AddPlayerViewController: UIViewController, UIScrollViewDelegate {
         phoneNumber.text = ""
         cityname.text = ""
         scrollView.setContentOffset(.zero, animated: true)
+    }
+    
+    private func showToast() {
+        let toast = Toast().showToastMessage(message: "Player Saved successfully")
+        toast.frame.origin.x = (self.view.frame.width / 2) - (toast.frame.width / 2)
+        toast.frame.origin.y = self.view.frame.height - 100
+        self.view.addSubview(toast)
+        UIView.animate(withDuration: 3.0, delay: 0.2, options: .curveEaseInOut, animations: {
+            toast.alpha = 0.0
+        }, completion: { isCompleted in
+            if isCompleted {
+                toast.removeFromSuperview()
+            }
+            
+        })
     }
     
     @IBAction func onClickBack(_ sender: Any) {
