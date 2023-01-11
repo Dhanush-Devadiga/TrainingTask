@@ -40,5 +40,5 @@ class Toast: UILabel {
         return self
     }
     
-
+    
 }
