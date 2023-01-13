@@ -40,6 +40,9 @@ class OTPVerificationVC: UIViewController {
             resendOtpButton.isEnabled = true
             resendOtpButton.setTitle("Resend OTP", for: .normal)
            }
+           else {
+            resendOtpButton.isEnabled = false
+           }
        }
     
     @IBAction func onVerifyButtonClick(_ sender: Any) {
@@ -104,6 +107,7 @@ class OTPVerificationVC: UIViewController {
                 print("resent OTP")
             })
         }
+         endTimer = Date(timeIntervalSinceNow: 21)
     }
     
     @IBAction func onBackTapped(_ sender: Any) {

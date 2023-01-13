@@ -1946,7 +1946,7 @@
                                                 <rect key="frame" x="48" y="323" width="280" height="175"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set your password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bxo-rI-Ikh">
-                                                        <rect key="frame" x="59" y="8" width="150" height="21"/>
+                                                        <rect key="frame" x="59" y="8" width="151.5" height="21"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="21" id="PCe-w4-Vju"/>
                                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="ue2-S4-gIN"/>
@@ -2117,7 +2117,7 @@
                                                 <rect key="frame" x="50" y="330" width="275" height="175"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Forgot your password?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i51-k2-TUy">
-                                                        <rect key="frame" x="45" y="8" width="185" height="21"/>
+                                                        <rect key="frame" x="44.5" y="8" width="186.5" height="21"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="185" id="Wf1-7Y-mku"/>
                                                             <constraint firstAttribute="height" constant="21" id="sA4-b9-QhQ"/>
